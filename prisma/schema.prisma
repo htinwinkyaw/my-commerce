@@ -44,18 +44,19 @@ model VerificationToken {
 }
 
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  role          Role      @default(USER)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  accounts      Account[]
-  orders        Order[]
-  reviews       Review[]
-  sessions      Session[]
+  name            String?
+  email           String   @unique
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  emailVerified   DateTime?
+  hashedPassword  String?
+  image           String?
+  role            Role      @default(USER)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  accounts        Account[]
+  orders          Order[]
+  reviews         Review[]
+  sessions        Session[]
 }
 
 model Product {
