@@ -1,7 +1,8 @@
 import React from "react";
+import HomeClient from "./HomeClient";
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return <HomeClient />;
 };
 
 export default HomePage;

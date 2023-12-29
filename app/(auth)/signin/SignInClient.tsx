@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -10,7 +10,6 @@ import { signIn } from "next-auth/react";
 import Heading from "@/app/_components/Heading";
 import Input from "@/app/_components/Input";
 import Button from "@/app/_components/Button";
-import { User } from "@prisma/client";
 
 const SignInClient = () => {
   const router = useRouter();

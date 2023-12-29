@@ -62,6 +62,7 @@ model User {
 model Product {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   name        String
+  price       Int
   description String
   images      String[]
   brand       String
