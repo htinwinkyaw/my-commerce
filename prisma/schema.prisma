@@ -67,7 +67,7 @@ model Product {
   images      String[]
   brand       String
   categoryId  String    @db.ObjectId
-  inStock     Boolean
+  inStock     Boolean   @default(false)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   reviews     Review[]

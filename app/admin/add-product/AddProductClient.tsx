@@ -40,7 +40,8 @@ const AddProductClient: React.FC<Props> = ({ categories }) => {
 
     if (data.category === "") {
       setLoading(false);
-      toast.error("Category cannot be empty.");
+      toast.error("Choose a product category.");
+
       return;
     }
 
