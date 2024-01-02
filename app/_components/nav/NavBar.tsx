@@ -4,6 +4,8 @@ import Container from "../Container";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import UserMenu from "./UserMenu";
 
+import NavCart from "./NavCart";
+
 const NavBar = async () => {
   const currentUser = await getCurrentUser();
 
@@ -17,7 +19,8 @@ const NavBar = async () => {
             </Link>
             <div className="hidden md:block">SEARCH BAR</div>
             <div className="flex items-center gap-8 md:gap-12">
-              <div>CART</div>
+              <Link href="/products">Products</Link>
+              <NavCart />
               <div>
                 <UserMenu currentUser={currentUser} />
               </div>

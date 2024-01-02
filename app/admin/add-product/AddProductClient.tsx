@@ -11,6 +11,7 @@ import SelectCategory from "./SelectCategory";
 import { Category } from "@prisma/client";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface Props {
   categories: Category[];
@@ -18,6 +19,7 @@ interface Props {
 
 const AddProductClient: React.FC<Props> = ({ categories }) => {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -50,6 +52,7 @@ const AddProductClient: React.FC<Props> = ({ categories }) => {
         .post("/api/products", data)
         .then((res) => {
           toast.success("New product is added.");
+          router.push("/admin/manage-products");
         })
         .catch((error) => {
           console.log(error);

@@ -78,7 +78,7 @@ model Product {
 model Order {
   id              String          @id @default(auto()) @map("_id") @db.ObjectId
   userId          String          @db.ObjectId
-  produts         CartProductType[]
+  products        CartProductType[]
   amount          Int
   address         AddressType
   paymentStatus   PaymentStatus
@@ -90,12 +90,9 @@ model Order {
 }
 
 model Cart {
-  id        String @id @db.ObjectId @map("_id") @default(auto())
-  name      String
-  price     Int
-  image     String
-  quantity  Int
-  userId    String @db.ObjectId
+  id              String @id @db.ObjectId @map("_id") @default(auto())
+  products        CartProductType[]
+  userId          String @db.ObjectId
 }
 
 model Review {
@@ -125,10 +122,13 @@ type AddressType {
 }
 
 type CartProductType {
-  name      String
-  price     Int
-  image     String
-  quantity  Int
+  id          String
+  name        String
+  price       Int
+  description String
+  brand       String
+  quantity    Int
+  image       String
 }
 
 enum Role {

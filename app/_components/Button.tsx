@@ -8,7 +8,7 @@ interface Props {
   small?: boolean;
   outline?: boolean;
   custom?: string;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button: React.FC<Props> = ({
