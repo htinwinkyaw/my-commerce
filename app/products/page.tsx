@@ -1,11 +1,10 @@
-import React from "react";
 import Container from "../_components/Container";
-import ProductsClient from "./ProductsClient";
-import { getProducts } from "@/actions/getProducts";
 import ProductList from "../_components/ProductList";
+import React from "react";
+import productServices from "@/server/services/productServices";
 
 const ProductsPage = async () => {
-  const products = await getProducts();
+  const products = await productServices.getProducts({ category: null });
 
   return (
     <div className="p-8">
