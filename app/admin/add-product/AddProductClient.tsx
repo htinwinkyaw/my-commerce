@@ -1,7 +1,6 @@
 "use client";
 
-import { Category, Product } from "@prisma/client";
-
+import { Category } from "@prisma/client";
 import FormWrap from "@/app/_components/FormWrap";
 import Heading from "@/app/_components/Heading";
 import ProductForm from "./ProductForm";

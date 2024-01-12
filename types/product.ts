@@ -20,10 +20,10 @@ export type CartProductType = {
   description: string;
   brand: string;
   quantity: number;
-  image: string;
+  // image: string;
 };
 
-export type ProductParams = {
-  category: string | null;
+export type IProductParams = {
+  category?: string | null;
   searchTerm?: string;
 };

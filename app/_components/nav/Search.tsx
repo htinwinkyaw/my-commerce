@@ -30,7 +30,7 @@ const Search = () => {
   };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <input
         type="text"
         id="searchTerm"
@@ -41,12 +41,11 @@ const Search = () => {
       />
       <button
         type="submit"
-        onClick={handleSubmit(onSubmit)}
         className="p-2 text-white bg-slate-700 rounded-r-md border focus:border-[0.5px] hover:opacity-70"
       >
         Search
       </button>
-    </div>
+    </form>
   );
 };
 

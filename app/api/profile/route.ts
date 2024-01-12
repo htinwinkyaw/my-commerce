@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { checkUnauthorizedUser } from "@/app/_utils/checkUnauthorizedUser";
-import { getCurrentUser } from "@/actions/getCurrentUser";
 import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
 import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";
 import prisma from "@/app/_lib/prismadb";

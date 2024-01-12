@@ -51,13 +51,15 @@ const ProductForm: React.FC<Props> = ({ product, categories }) => {
         ? `/api/products/${product.id}`
         : "/api/products";
 
-      product
+      const response = product
         ? await axios.put(endpoint, data)
         : await axios.post(endpoint, data);
 
-      toast.success(`Product is ${product ? "updated" : "created"}.`);
+      if (response.data.status === 200 || response.data.status === 201) {
+        toast.success(response.data.message);
+      }
 
-      router.back();
+      router.push("/admin/manage-products");
       router.refresh();
     } catch (error) {
       toast.error(`Failed to ${product ? "update" : "create"} product.`);

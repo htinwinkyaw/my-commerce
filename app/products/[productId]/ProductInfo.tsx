@@ -24,7 +24,7 @@ const ProductDetailClient: React.FC<Props> = ({ product }) => {
     price: product!.price,
     brand: product!.brand,
     description: product!.description,
-    image: product!.images[0],
+    // image: product!.images[0],
     quantity: 1,
   });
 

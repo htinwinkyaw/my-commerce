@@ -1,6 +1,5 @@
 import addressServices from "@/server/services/addressServices";
 import { checkUnauthorizedUser } from "@/app/_utils/checkUnauthorizedUser";
-import { getCurrentUser } from "@/actions/getCurrentUser";
 import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
 import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";
 

@@ -1,4 +1,4 @@
-import { ExtendedProductType, ProductParams } from "@/types/product";
+import { ExtendedProductType, IProductParams } from "@/types/product";
 
 import { Product } from "@prisma/client";
 import prisma from "@/app/_lib/prismadb";
@@ -43,17 +43,23 @@ const createProduct = async (data: {
 const getProducts = async ({
   category,
   searchTerm = "",
-}: ProductParams): Promise<ExtendedProductType[]> => {
+}: IProductParams): Promise<ExtendedProductType[]> => {
   try {
-    let query: any = {};
+    let whereClause: any = {};
 
     if (category) {
-      query.category = category;
+      const res = await prisma.category.findFirst({
+        where: { name: category },
+      });
+
+      if (!res?.id) throw new Error(`No category with ${category} name.`);
+
+      whereClause.categoryId = res.id;
     }
 
     const products = await prisma.product.findMany({
       where: {
-        ...query,
+        ...whereClause,
         OR: [
           { name: { contains: searchTerm, mode: "insensitive" } },
           { description: { contains: searchTerm, mode: "insensitive" } },

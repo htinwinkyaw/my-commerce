@@ -27,7 +27,8 @@ const ReviewForm: React.FC<Props> = ({ productId }) => {
     defaultValues: { rating: 0, comment: "" },
   });
 
-  const handleRatingChange = (event: SyntheticEvent<Element, Event>) => {
+  // const handleRatingChange = (event: SyntheticEvent<Element, Event>) => {
+  const handleRatingChange = (event: any) => {
     setValue("rating", event.target.defaultValue);
   };
 

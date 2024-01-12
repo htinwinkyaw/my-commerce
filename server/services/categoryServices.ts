@@ -7,7 +7,9 @@ import prisma from "@/app/_lib/prismadb";
  */
 const getCategories = async (): Promise<Category[]> => {
   try {
-    const categories = await prisma.category.findMany();
+    const categories = await prisma.category.findMany({
+      orderBy: { name: "asc" },
+    });
 
     return categories;
   } catch (error) {
