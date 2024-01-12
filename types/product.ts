@@ -25,5 +25,5 @@ export type CartProductType = {
 
 export type ProductParams = {
   category: string | null;
-  searchTerm: string;
+  searchTerm?: string;
 };

@@ -1,8 +1,8 @@
 import { checkUnauthorizedUser } from "@/app/_utils/checkUnauthorizedUser";
-import { getCurrentUser } from "@/actions/getCurrentUser";
 import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
 import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";
 import reviewServices from "@/server/services/reviewServices";
+import userServices from "@/server/services/userServices";
 
 /**
  * Create new review
@@ -14,7 +14,7 @@ export const POST = async (request: Request) => {
     const unauthorizedResponse = await checkUnauthorizedUser();
     if (unauthorizedResponse) return unauthorizedResponse;
 
-    const currentUser = await getCurrentUser();
+    const currentUser = await userServices.getCurrentUser();
     const userId = currentUser?.id;
 
     const body: { productId: string; rating: string; comment?: string } =
