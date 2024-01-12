@@ -2,10 +2,10 @@ import { DeliveryStatus, PaymentStatus } from "@prisma/client";
 
 import { checkUnauthorizedAdmin } from "@/app/_utils/checkUnauthorizedAdmin";
 import { checkUnauthorizedUser } from "@/app/_utils/checkUnauthorizedUser";
-import { getCurrentUser } from "@/actions/getCurrentUser";
 import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
 import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";
 import orderServices from "@/server/services/orderServices";
+import userServices from "@/server/services/userServices";
 
 /**
  * Creating new order
@@ -17,7 +17,7 @@ export const POST = async (request: Request) => {
     const unauthorizedResponse = await checkUnauthorizedUser();
     if (unauthorizedResponse) return unauthorizedResponse;
 
-    const currentUser = await getCurrentUser();
+    const currentUser = await userServices.getCurrentUser();
     const userId = currentUser?.id;
 
     const body = await request.json();

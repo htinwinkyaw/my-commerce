@@ -1,20 +1,18 @@
 import AddProductClient from "./AddProductClient";
 import Container from "@/app/_components/Container";
-import FormWrap from "@/app/_components/FormWrap";
 import NullData from "@/app/_components/NullData";
-import { ProductFormMode } from "@/types/enum";
 import React from "react";
-import { getCategories } from "@/actions/getCategories";
-import { getCurrentUser } from "@/actions/getCurrentUser";
+import categoryServices from "@/server/services/categoryServices";
+import userServices from "@/server/services/userServices";
 
 const AddProductPage = async () => {
-  const currentUser = await getCurrentUser();
+  const currentUser = await userServices.getCurrentUser();
 
   if (!currentUser || currentUser.role !== "ADMIN") {
     return <NullData title="Oops! Cannot access this page." />;
   }
 
-  const categories = await getCategories();
+  const categories = await categoryServices.getCategories();
 
   return (
     <div>

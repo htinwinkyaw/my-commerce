@@ -1,11 +1,11 @@
 import Container from "@/app/_components/Container";
-import React from "react";
 import ManageOrdersClient from "./ManageOrdersClient";
-import { getOrders } from "@/actions/getOrders";
 import NullData from "@/app/_components/NullData";
+import React from "react";
+import orderServices from "@/server/services/orderServices";
 
 const ManageOrdersPage = async () => {
-  const orders = await getOrders();
+  const orders = await orderServices.getDetailOrders();
 
   if (!orders || orders.length === 0) {
     return <NullData title="Oops! No order is found." />;

@@ -64,6 +64,22 @@ const getOrders = async (): Promise<Order[]> => {
 };
 
 /**
+ * Fetching all orders from the database.
+ * @returns Promise resolving the array of order
+ */
+const getDetailOrders = async (): Promise<(Order & { user: User })[]> => {
+  try {
+    const orders = await prisma.order.findMany({ include: { user: true } });
+
+    return orders;
+  } catch (error) {
+    console.error("Error fetching orders: ", error);
+
+    throw new Error("Failed to fetch ORDERS.");
+  }
+};
+
+/**
  * Fetching all orders by filtering with userid from the database.
  * @param userId User ID for fetching orders
  * @returns Promise resolving the array of order
@@ -129,6 +145,7 @@ const updateOrderStatus = async (data: {
 const orderServices = {
   createOrder,
   getOrders,
+  getDetailOrders,
   getOrdersByUserId,
   updateOrderStatus,
 };
