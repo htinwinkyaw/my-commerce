@@ -11,7 +11,7 @@ const NavCart = () => {
   return (
     <Link
       href="/cart"
-      className="relative flex items-center gap-2 cursor-pointer"
+      className="relative flex items-center gap-1 cursor-pointer"
     >
       <div className="text-3xl">
         <CiShoppingCart />

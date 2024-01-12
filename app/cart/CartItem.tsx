@@ -1,14 +1,15 @@
-import { CartProductType } from "@/types/products";
+import { CartProductType } from "@/types/product";
 import React from "react";
-import { formatPrice } from "../_utils/formatPrice";
 import SetQuantity from "../_components/SetQuantity";
+import { formatPrice } from "../_utils/formatPrice";
 import useCart from "../_hooks/useCart";
 
 interface Props {
+  checkout: boolean;
   product: CartProductType;
 }
 
-const CartItem: React.FC<Props> = ({ product }) => {
+const CartItem: React.FC<Props> = ({ checkout, product }) => {
   const {
     handleIncreaseQtyInCart,
     hanldeDecreaseQtyInCart,
@@ -20,12 +21,16 @@ const CartItem: React.FC<Props> = ({ product }) => {
       <div className="col-span-2 justify-self-start">{product.name}</div>
       <div className="justify-self-center">{formatPrice(product.price)}</div>
       <div className="justify-self-center">
-        <SetQuantity
-          cartCounter={true}
-          cartProduct={product}
-          handleQtyIncrease={handleIncreaseQtyInCart.bind(null, product)}
-          handleQtyDecrease={hanldeDecreaseQtyInCart.bind(null, product)}
-        />
+        {checkout ? (
+          product.quantity
+        ) : (
+          <SetQuantity
+            cartCounter={true}
+            cartProduct={product}
+            handleQtyIncrease={handleIncreaseQtyInCart.bind(null, product)}
+            handleQtyDecrease={hanldeDecreaseQtyInCart.bind(null, product)}
+          />
+        )}
       </div>
       <div className="justify-self-end">
         {formatPrice(product.price * product.quantity)}

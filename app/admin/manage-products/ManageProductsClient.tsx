@@ -1,15 +1,6 @@
 "use client";
 
-import ActionButton from "@/app/_components/ActionButton";
-import Heading from "@/app/_components/Heading";
-import Status from "@/app/_components/Status";
-import { formatPrice } from "@/app/_utils/formatPrice";
-import { ExtendedProductType } from "@/types/products";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import React, { useCallback } from "react";
-import toast from "react-hot-toast";
 import {
   MdAccessTimeFilled,
   MdCached,
@@ -18,9 +9,20 @@ import {
   MdEdit,
   MdRemoveRedEye,
 } from "react-icons/md";
+import React, { useCallback } from "react";
+
+import ActionButton from "@/app/_components/ActionButton";
+import CustomDataGrid from "@/app/_components/CustomDataGrid";
+import { ExtendedProductType } from "@/types/product";
+import NullData from "@/app/_components/NullData";
+import Status from "@/app/_components/Status";
+import axios from "axios";
+import { formatPrice } from "@/app/_utils/formatPrice";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface Props {
-  products: ExtendedProductType[];
+  products: ExtendedProductType[] | null | undefined;
 }
 
 const ManageProductsClient: React.FC<Props> = ({ products }) => {
@@ -29,7 +31,7 @@ const ManageProductsClient: React.FC<Props> = ({ products }) => {
   const handleStock = useCallback(
     (id: string, inStock: boolean) => {
       axios
-        .put("/api/products", { id, inStock })
+        .patch("/api/products", { id, inStock })
         .then((res) => {
           router.refresh();
           toast.success("Update Product: Success");
@@ -45,16 +47,21 @@ const ManageProductsClient: React.FC<Props> = ({ products }) => {
     (id: string) => {
       axios
         .delete(`/api/products/${id}`)
-        .then((res) => {
+        .then((response) => {
+          if (response.data.status === 204) {
+            toast.success(response.data.message);
+          }
           router.refresh();
-          toast.success("Delete Product: Success");
         })
         .catch((error) => {
+          error;
           toast.error("Delete Product: Fail");
         });
     },
     [router]
   );
+
+  if (!products) return <NullData title="Oops! No product is found." />;
 
   const rows = products.map((product) => {
     return {
@@ -131,7 +138,9 @@ const ManageProductsClient: React.FC<Props> = ({ products }) => {
             <ActionButton
               label="Edit"
               icon={MdEdit}
-              onClick={() => {}}
+              onClick={() => {
+                router.push(`/products/edit/${params.row.id}`);
+              }}
               disabled={false}
             />
             <ActionButton
@@ -149,21 +158,7 @@ const ManageProductsClient: React.FC<Props> = ({ products }) => {
   ];
 
   return (
-    <div className="flex flex-col m-auto max-w-[1150px] text-xl">
-      <div className="mt-8 mb-4">
-        <Heading title="Manage Products" center />
-      </div>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: { paginationModel: { page: 0, pageSize: 10 } },
-        }}
-        pageSizeOptions={[10, 20, 50]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-    </div>
+    <CustomDataGrid title="Manage Products" rows={rows} columns={columns} />
   );
 };
 

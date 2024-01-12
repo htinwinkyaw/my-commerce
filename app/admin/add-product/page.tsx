@@ -1,10 +1,11 @@
-import { getCurrentUser } from "@/actions/getCurrentUser";
-import FormWrap from "@/app/_components/FormWrap";
-import NullData from "@/app/_components/NullData";
-import React from "react";
 import AddProductClient from "./AddProductClient";
 import Container from "@/app/_components/Container";
+import FormWrap from "@/app/_components/FormWrap";
+import NullData from "@/app/_components/NullData";
+import { ProductFormMode } from "@/types/enum";
+import React from "react";
 import { getCategories } from "@/actions/getCategories";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 
 const AddProductPage = async () => {
   const currentUser = await getCurrentUser();
@@ -18,9 +19,7 @@ const AddProductPage = async () => {
   return (
     <div>
       <Container>
-        <FormWrap>
-          <AddProductClient categories={categories} />
-        </FormWrap>
+        <AddProductClient categories={categories} />
       </Container>
     </div>
   );

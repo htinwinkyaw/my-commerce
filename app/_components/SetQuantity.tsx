@@ -1,4 +1,4 @@
-import { CartProductType } from "@/types/products";
+import { CartProductType } from "@/types/product";
 import React from "react";
 
 interface Props {

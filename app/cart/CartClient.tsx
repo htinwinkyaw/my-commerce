@@ -50,7 +50,7 @@ const CartClient: React.FC<Props> = ({ user }) => {
       </div>
 
       {cartProducts.map((product, i) => {
-        return <CartItem key={i} product={product} />;
+        return <CartItem key={i} checkout={false} product={product} />;
       })}
 
       <div className="flex flex-row justify-between gap-4 p-4 border-t-[1.5px] border-slate-200">

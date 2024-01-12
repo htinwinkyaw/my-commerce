@@ -1,14 +1,14 @@
 import Container from "@/app/_components/Container";
-import React from "react";
 import ProductDetailClient from "./ProductDetailClient";
-import { getProductById } from "@/actions/getProductById";
+import React from "react";
+import productServices from "@/server/services/productServices";
 
 interface Props {
   params: { productId: string };
 }
 
 const ProductDetailPage: React.FC<Props> = async ({ params }) => {
-  const product = await getProductById(params.productId);
+  const product = await productServices.getProductDetailById(params.productId);
 
   return (
     <div className="pt-8">

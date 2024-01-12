@@ -1,11 +1,11 @@
-import { ExtendedProductType } from "@/types/products";
+import { ExtendedProductType } from "@/types/product";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { truncateName } from "../_utils/truncateName";
-import { formatPrice } from "../_utils/formatPrice";
 import { Rating } from "@mui/material";
+import React from "react";
 import { calculateRating } from "../_utils/calculateRating";
+import { formatPrice } from "../_utils/formatPrice";
+import { truncateName } from "../_utils/truncateName";
 
 interface Props {
   product: ExtendedProductType;

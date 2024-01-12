@@ -4,6 +4,7 @@ import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 interface Props {
   id: string;
   label: string;
+  value?: string | null;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
   disabled: boolean;
@@ -24,7 +25,7 @@ const TextArea: React.FC<Props> = ({
         id={id}
         placeholder=""
         disabled={disabled}
-        {...register(id, { required })}
+        {...register(id, { required: required })}
         className={`
         peer p-4 pt-6 w-full border-2 outline-none  min-h-[150px] max-h-[150px] rounded-md transition
         ${

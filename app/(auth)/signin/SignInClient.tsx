@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import Link from "next/link";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+
 import { AiOutlineGoogle } from "react-icons/ai";
-import { signIn } from "next-auth/react";
+import Button from "@/app/_components/Button";
 import Heading from "@/app/_components/Heading";
 import Input from "@/app/_components/Input";
-import Button from "@/app/_components/Button";
+import Link from "next/link";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const SignInClient = () => {
   const router = useRouter();
@@ -31,18 +32,18 @@ const SignInClient = () => {
     signIn("credentials", { ...data, redirect: false })
       .then((callback) => {
         if (callback?.ok) {
-          router.push("/dashboard");
+          router.push("/");
           router.refresh();
           return toast.success("Signed in.");
         }
 
         if (callback?.error) {
           if (callback.status === 401)
-            return toast.error("Invalid email or password.");
+            return toast.error("Invalid email or passsword.");
         }
       })
       .catch((error) => {
-        console.log(error);
+        return toast.error(error.message);
       })
       .finally(() => {
         setIsLoading(false);

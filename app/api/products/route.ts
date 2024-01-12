@@ -1,55 +1,58 @@
-import { getCurrentUser } from "@/actions/getCurrentUser";
-import prisma from "@/app/_lib/prismadb";
-import { NextResponse } from "next/server";
+import { checkUnauthorizedAdmin } from "@/app/_utils/checkUnauthorizedAdmin";
+import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
+import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";
+import productServices from "@/server/services/productServices";
 
+/**
+ * Create new product
+ * @param request
+ * @returns Response function with NextResponse
+ */
 export const POST = async (request: Request) => {
-  const currentUser = await getCurrentUser();
-
-  if (!currentUser || currentUser.role !== "ADMIN") {
-    return NextResponse.error();
-  }
-
-  const body = await request.json();
-  const { name, price, category, description, brand, inStock } = body;
-
   try {
-    const product = await prisma.product.create({
-      data: {
-        name,
-        price: parseInt(price),
-        categoryId: category,
-        description,
-        brand,
-        inStock,
-      },
-    });
+    const unauthorizedResponse = await checkUnauthorizedAdmin();
+    if (unauthorizedResponse) return unauthorizedResponse;
 
-    return NextResponse.json(product);
+    const body: {
+      name: string;
+      price: string;
+      category: string;
+      description: string;
+      brand: string;
+      inStock: boolean;
+    } = await request.json();
+
+    const product = await productServices.createProduct(body);
+
+    return handleSuccessResponse(201, "New product is created.", product);
   } catch (error) {
-    return NextResponse.error();
+    return handleErrorResponse(500, "Internal server error.");
   }
 };
 
-export const PUT = async (request: Request) => {
-  const currentUser = await getCurrentUser();
+/**
+ * Change the PRODUCT STOCK STATUS
+ * @param request
+ * @returns Response function with NextResponse
+ */
+export const PATCH = async (request: Request) => {
+  const unauthorizedResponse = await checkUnauthorizedAdmin();
+  if (unauthorizedResponse) return unauthorizedResponse;
 
-  if (!currentUser || currentUser.role !== "ADMIN") {
-    return NextResponse.error();
-  }
-
-  const body = await request.json();
-  const { id, inStock } = body;
+  const body: { id: string; inStock: boolean } = await request.json();
 
   try {
-    const product = await prisma.product.update({
-      where: { id: id },
-      data: { inStock: !inStock },
-    });
+    const updatedProduct = await productServices.updateProductStockStatus(body);
 
-    if (!product) return NextResponse.error();
-
-    return NextResponse.json(product);
+    return handleSuccessResponse(
+      200,
+      "PRODUCT STOCK STATUS is updated.",
+      updatedProduct
+    );
   } catch (error) {
-    return NextResponse.error();
+    return handleErrorResponse(
+      500,
+      "Failed to change the PROUCT STOCK STATUS."
+    );
   }
 };

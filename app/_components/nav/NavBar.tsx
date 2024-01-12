@@ -1,13 +1,13 @@
-import Link from "next/link";
-import React from "react";
 import Container from "../Container";
-import { getCurrentUser } from "@/actions/getCurrentUser";
-import UserMenu from "./UserMenu";
-
+import Link from "next/link";
 import NavCart from "./NavCart";
+import React from "react";
+import Search from "./Search";
+import UserMenu from "./UserMenu";
+import userServices from "@/server/services/userServices";
 
 const NavBar = async () => {
-  const currentUser = await getCurrentUser();
+  const currentUser = await userServices.getCurrentUser();
 
   return (
     <div className="sticky top-0 w-full z-30 bg-slate-200 shadow-sm">
@@ -15,11 +15,12 @@ const NavBar = async () => {
         <Container>
           <div className="flex items-center justify-between gap-3 md:gap-0">
             <Link href="/" className="font-bold text-2xl text-slate-700">
-              MYCOMM
+              MYCOM
             </Link>
-            <div className="hidden md:block">SEARCH BAR</div>
+            <div className="hidden md:block">
+              <Search />
+            </div>
             <div className="flex items-center gap-8 md:gap-12">
-              <Link href="/products">Products</Link>
               <NavCart />
               <div>
                 <UserMenu currentUser={currentUser} />

@@ -1,10 +1,10 @@
-import React from "react";
-import Container from "../_components/Container";
 import CartClient from "./CartClient";
-import { getCurrentUser } from "@/actions/getCurrentUser";
+import Container from "../_components/Container";
+import React from "react";
+import userServices from "@/server/services/userServices";
 
 const CartPage = async () => {
-  const currentUser = await getCurrentUser();
+  const currentUser = await userServices.getCurrentUser();
 
   return (
     <div className="mt-8">

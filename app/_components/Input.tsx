@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Control,
   FieldErrors,
   FieldValues,
   UseFormRegister,
-  useWatch,
 } from "react-hook-form";
 
 interface Props {
@@ -30,8 +29,6 @@ const Input: React.FC<Props> = ({
   control,
   errors,
 }) => {
-  const value: string = useWatch({ control, name: id });
-
   return (
     <div className="w-full relative">
       <input

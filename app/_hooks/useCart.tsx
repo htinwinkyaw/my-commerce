@@ -7,7 +7,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import { CartProductType } from "@/types/products";
+
+import { CartProductType } from "@/types/product";
 import toast from "react-hot-toast";
 
 type CartContextType = {

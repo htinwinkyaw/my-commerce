@@ -1,4 +1,4 @@
-import { ExtendedProductType } from "@/types/products";
+import { ExtendedProductType } from "@/types/product";
 import React from "react";
 
 interface Props {

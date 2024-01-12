@@ -1,10 +1,9 @@
 import { AuthOptions } from "next-auth";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "../app/_lib/prismadb";
 import userServices from "./services/userServices";
-import bcrypt from "bcrypt";
 
 const authOptions: AuthOptions = {
   providers: [
@@ -37,7 +36,7 @@ const authOptions: AuthOptions = {
   ],
   adapter: PrismaAdapter(prisma),
   pages: {
-    signIn: "/signin",
+    signIn: "/signIn",
   },
   session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,
