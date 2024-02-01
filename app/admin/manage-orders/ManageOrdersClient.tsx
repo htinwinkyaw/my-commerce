@@ -9,10 +9,10 @@ import {
 } from "react-icons/md";
 import React, { useCallback, useState } from "react";
 
-import ActionButton from "@/app/_components/ActionButton";
+import ActionButton from "@/app/_components/ui/ActionButton";
 import CustomDataGrid from "@/app/_components/CustomDataGrid";
 import { GridColDef } from "@mui/x-data-grid";
-import Status from "@/app/_components/Status";
+import Status from "@/app/_components/ui/Status";
 import axios from "axios";
 import moment from "moment";
 import toast from "react-hot-toast";

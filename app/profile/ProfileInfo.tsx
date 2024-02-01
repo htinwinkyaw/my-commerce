@@ -3,9 +3,9 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import React, { useState } from "react";
 
-import Button from "../_components/Button";
+import Button from "../_components/ui/Button";
 import { CurrentUserDetail } from "@/types/user";
-import Input from "../_components/Input";
+import Input from "../_components/ui/Input";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -17,6 +17,7 @@ interface Props {
 const ProfileInfo = ({ user }: Props) => {
   const [editing, setEditing] = useState(false);
   const [updating, setUpdating] = useState(false);
+  const [image, setImage] = useState<File | null>(null);
 
   const router = useRouter();
 
@@ -24,18 +25,17 @@ const ProfileInfo = ({ user }: Props) => {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FieldValues>({
-    defaultValues: { email: user?.email || "", name: user?.name || "" },
+    defaultValues: { name: user?.name || "" },
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setUpdating(true);
 
-    const { name, email } = data;
-
     axios
-      .put("/api/profile", { name, email })
+      .put("/api/profile", { name: data.name })
       .then(() => {
         toast.success("Profile is updated.");
         setEditing(false);
@@ -46,59 +46,61 @@ const ProfileInfo = ({ user }: Props) => {
       })
       .finally(() => {
         setUpdating(false);
+        setImage(null);
       });
   };
 
   return (
     <div className="flex flex-col gap-3">
-      {editing ? (
-        <Input
-          label="New Name"
-          id="name"
-          type="text"
-          control={control}
-          errors={errors}
-          register={register}
-          disabled={updating}
-          required
-        />
-      ) : (
-        <div>
-          <span>Name:</span>
-          <span>{user!.name}</span>
-        </div>
+      {editing && (
+        <>
+          <Input
+            label="New Name"
+            id="name"
+            type="text"
+            control={control}
+            errors={errors}
+            register={register}
+            disabled={updating}
+            required
+          />
+          <div className="flex flex-row justify-between gap-1">
+            <Button
+              label="Cancel"
+              onClick={() => {
+                setImage(null);
+                setEditing(false);
+                reset();
+              }}
+              outline
+              small
+            />
+            <Button
+              label={updating ? "Updating..." : "Update"}
+              onClick={handleSubmit(onSubmit)}
+              small
+            />
+          </div>
+        </>
       )}
 
       {!editing && (
-        <Button
-          label="Edit Profile"
-          onClick={() => {
-            setEditing((prev) => !prev);
-          }}
-          small
-          outline
-        />
-      )}
-
-      {editing && (
-        <div className="flex flex-row justify-between gap-1">
+        <>
+          <div className="flex flex-row gap-2">
+            <span>Name:</span>
+            <span>{user!.name}</span>
+          </div>
           <Button
-            label="Cancel"
+            label="Edit Profile"
             onClick={() => {
-              setEditing(false);
+              setEditing((prev) => !prev);
             }}
+            small
             outline
-            small
           />
-          <Button
-            label={updating ? "Updating..." : "Update"}
-            onClick={handleSubmit(onSubmit)}
-            small
-          />
-        </div>
+        </>
       )}
     </div>
   );
 };
-
 export default ProfileInfo;

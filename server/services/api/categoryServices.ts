@@ -11,11 +11,59 @@ const getCategories = async (): Promise<Category[]> => {
       orderBy: { name: "asc" },
     });
 
-    return categories;
+    const filteredCategories = categories.filter((category) => {
+      return category.name !== "All";
+    });
+
+    const customizedCategories = [
+      { id: "custom", name: "All" },
+      ...filteredCategories,
+    ];
+
+    return customizedCategories;
   } catch (error) {
     console.error("Error fetching categories: ", error);
 
     throw new Error("Failed to fetch CATEGORIES.");
+  }
+};
+
+const getCategoriesWithoutAll = async (): Promise<Category[]> => {
+  try {
+    const categories = await prisma.category.findMany({
+      orderBy: { name: "asc" },
+    });
+
+    const filteredCategories = categories.filter((category) => {
+      return category.name !== "All";
+    });
+
+    return filteredCategories;
+  } catch (error) {
+    console.error("Error fetching CATEGORIES WITHOUT ALL: ", error);
+
+    throw new Error("Failed to fetch CATEGORIES WITHOUT ALL.");
+  }
+};
+
+/**
+ * Fetch Category by categoryId
+ * @param categoryId
+ * @returns Promise resolving Category get by categoryId or null
+ */
+const getCategoryById = async (
+  categoryId: string
+): Promise<Category | null> => {
+  try {
+    const category = await prisma.category.findFirst({
+      where: { id: categoryId },
+    });
+
+    return category;
+  } catch (error) {
+    console.error("Error fetching category by id: ", error);
+
+    throw new Error("Failed to fetch category by id.");
   }
 };
 
@@ -36,7 +84,10 @@ const createCategory = async (data: any): Promise<Category> => {
  * @param data Category data for updating
  * @returns Promise resolving the updated category
  */
-const updateCategory = async (id: string, data: any): Promise<Category> => {
+const updateCategory = async (
+  id: string,
+  data: { name: string }
+): Promise<Category> => {
   const existingCategory = await prisma.category.findFirst({ where: { id } });
 
   if (!existingCategory) {
@@ -45,7 +96,7 @@ const updateCategory = async (id: string, data: any): Promise<Category> => {
 
   const updatedCategory = await prisma.category.update({
     where: { id },
-    data: { ...data },
+    data: { name: data.name },
   });
 
   return updatedCategory;
@@ -70,6 +121,8 @@ const deleteCategory = async (id: string): Promise<Category> => {
 
 const categoryServices = {
   getCategories,
+  getCategoriesWithoutAll,
+  getCategoryById,
   createCategory,
   updateCategory,
   deleteCategory,

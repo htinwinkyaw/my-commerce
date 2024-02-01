@@ -1,7 +1,7 @@
-import Container from "../_components/Container";
+import Container from "../_components/ui/Container";
 import ProductList from "../_components/ProductList";
 import React from "react";
-import productServices from "@/server/services/productServices";
+import productServices from "@/server/services/api/productServices";
 
 const ProductsPage = async () => {
   const products = await productServices.getProducts({ category: null });

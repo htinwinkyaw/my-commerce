@@ -1,9 +1,9 @@
 "use client";
 
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import React, { SyntheticEvent, useState } from "react";
+import React, { useState } from "react";
 
-import Button from "@/app/_components/Button";
+import Button from "@/app/_components/ui/Button";
 import { Rating } from "@mui/material";
 import TextArea from "@/app/admin/add-product/TextArea";
 import axios from "axios";
@@ -22,12 +22,12 @@ const ReviewForm: React.FC<Props> = ({ productId }) => {
     register,
     setValue,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: { rating: 0, comment: "" },
   });
 
-  // const handleRatingChange = (event: SyntheticEvent<Element, Event>) => {
   const handleRatingChange = (event: any) => {
     setValue("rating", event.target.defaultValue);
   };
@@ -50,6 +50,7 @@ const ReviewForm: React.FC<Props> = ({ productId }) => {
 
       if (response.data.status === 201) {
         toast.success(response.data.message);
+        reset();
         router.refresh();
       }
 
@@ -80,6 +81,7 @@ const ReviewForm: React.FC<Props> = ({ productId }) => {
       <Button
         label={loading ? "Adding..." : "Add Review"}
         onClick={handleSubmit(onSubmit)}
+        disabled={loading}
       />
     </div>
   );

@@ -2,13 +2,14 @@ import { Category, Product } from "@prisma/client";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import React, { useState } from "react";
 
-import Button from "@/app/_components/Button";
+import Button from "@/app/_components/ui/Button";
 import Checkbox from "./Checkbox";
-import Input from "@/app/_components/Input";
+import Input from "@/app/_components/ui/Input";
 import SelectCategory from "./SelectCategory";
 import TextArea from "./TextArea";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { uploadImage } from "@/app/_utils/uploadImage";
 import { useRouter } from "next/navigation";
 
 interface Props {
@@ -24,12 +25,14 @@ const ProductForm: React.FC<Props> = ({ product, categories }) => {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
+      image: product ? product.image : "",
       name: product ? product.name : "",
       price: product ? product.price : "",
-      category: product ? product.categoryId : "",
+      category: product ? product.categoryId : "default",
       description: product ? product.description : "",
       brand: product ? product.brand : "",
       inStock: product ? product.inStock : "",
@@ -39,12 +42,16 @@ const ProductForm: React.FC<Props> = ({ product, categories }) => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setLoading(true);
 
-    if (data.category === "") {
+    if (data.category === "default") {
       setLoading(false);
       toast.error("Choose a product category.");
 
       return;
     }
+
+    const downloadURL = await uploadImage(data, "/products");
+
+    const updatedData = { ...data, image: downloadURL };
 
     try {
       const endpoint = product
@@ -53,12 +60,13 @@ const ProductForm: React.FC<Props> = ({ product, categories }) => {
 
       const response = product
         ? await axios.put(endpoint, data)
-        : await axios.post(endpoint, data);
+        : await axios.post(endpoint, updatedData);
 
       if (response.data.status === 200 || response.data.status === 201) {
         toast.success(response.data.message);
       }
 
+      reset();
       router.push("/admin/manage-products");
       router.refresh();
     } catch (error) {
@@ -70,6 +78,16 @@ const ProductForm: React.FC<Props> = ({ product, categories }) => {
 
   return (
     <>
+      <input
+        type="file"
+        id="image"
+        accept="image/*"
+        disabled={loading}
+        {...register("image", { required: true })}
+        className="w-full cursor-pointer border-[1.5px] p-[-1.5px] border-slate-400 rounded
+        file:p-4 file:bg-slate-700 file:text-slate-200  file:rounded-l
+        disabled:cursor-not-allowed"
+      />
       <Input
         id="name"
         label="Name"

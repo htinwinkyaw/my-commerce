@@ -36,13 +36,15 @@ const AddressItem: React.FC<Props> = ({ mode, address }) => {
           <span className="text-slate-400">{address.phone}</span>
         </div>
         {mode === AddressItemMode.Edit && (
-          <div
-            className="text-blue-400 cursor-pointer"
-            onClick={() => {
-              router.push(`/addresses/edit/${address.id}`);
-            }}
-          >
-            Edit
+          <div className="flex flex-col justify-between items-end">
+            <div
+              className="text-blue-400 cursor-pointer"
+              onClick={() => {
+                router.push(`/addresses/edit/${address.id}`);
+              }}
+            >
+              Edit
+            </div>
           </div>
         )}
 

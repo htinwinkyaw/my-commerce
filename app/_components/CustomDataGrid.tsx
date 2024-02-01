@@ -1,6 +1,6 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
-import Heading from "./Heading";
+import Heading from "./ui/Heading";
 import React from "react";
 
 interface Props {

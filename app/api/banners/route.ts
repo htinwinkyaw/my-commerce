@@ -1,4 +1,4 @@
-import bannerServices from "@/server/services/bannerServices";
+import bannerServices from "@/server/services/api/bannerServices";
 import { checkUnauthorizedAdmin } from "@/app/_utils/checkUnauthorizedAdmin";
 import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
 import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";

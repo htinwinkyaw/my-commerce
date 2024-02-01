@@ -1,7 +1,7 @@
 import { checkUnauthorizedAdmin } from "@/app/_utils/checkUnauthorizedAdmin";
 import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
 import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";
-import productServices from "@/server/services/productServices";
+import productServices from "@/server/services/api/productServices";
 
 /**
  * Updating product by productId from the database.

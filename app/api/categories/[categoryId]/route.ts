@@ -1,4 +1,4 @@
-import categoryServices from "@/server/services/categoryServices";
+import categoryServices from "@/server/services/api/categoryServices";
 import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
 import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";
 
@@ -18,7 +18,7 @@ export const PUT = async (
 
     const category = await categoryServices.updateCategory(categoryId, body);
 
-    return handleSuccessResponse(202, "Category is updated.", category);
+    return handleSuccessResponse(200, "Category is updated.", category);
   } catch (error) {
     console.error("Error updating category: ", error);
 
@@ -45,6 +45,6 @@ export const DELETE = async (
   } catch (error) {
     console.error("Error deleting category: ", error);
 
-    return handleErrorResponse(500, "Failed to delete category.");
+    return handleErrorResponse(500, "Failed to delete category. (Route)");
   }
 };

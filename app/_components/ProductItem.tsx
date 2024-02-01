@@ -22,7 +22,7 @@ const ProductItem: React.FC<Props> = ({ product }) => {
       >
         <div className="flex flex-col w-full gap-1">
           <div className="relative aspect-square overflow-hidden w-full">
-            <Image alt={product.name} src={product.images[0]} />
+            <Image alt={product.name} src={product.image} fill />
           </div>
           <div className="mt-4">{truncateName(product.name)}</div>
           <div>

@@ -1,8 +1,8 @@
-import Container from "../_components/Container";
+import Container from "../_components/ui/Container";
 import NullData from "../_components/NullData";
 import OrdersClient from "./OrdersClient";
-import orderServices from "@/server/services/orderServices";
-import userServices from "@/server/services/userServices";
+import orderServices from "@/server/services/api/orderServices";
+import userServices from "@/server/services/api/userServices";
 
 const OrdersPage = async () => {
   const currentUser = await userServices.getCurrentUser();

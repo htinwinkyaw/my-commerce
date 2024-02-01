@@ -9,15 +9,18 @@ import userServices from "./userServices";
  * @param data
  * @returns Promise resolving user with updated information
  */
-const updateProfile = async (data: { name: string }): Promise<User> => {
+const updateProfile = async (data: {
+  name: string;
+  image: string;
+}): Promise<User> => {
   const userId = await userServices.getCurrentUserId();
 
   try {
-    const { name } = data;
+    const { name, image } = data;
 
     const updatedUser = await prisma.user.update({
       where: { id: userId },
-      data: { name: name },
+      data: { name, image },
     });
     return updatedUser;
   } catch (error) {

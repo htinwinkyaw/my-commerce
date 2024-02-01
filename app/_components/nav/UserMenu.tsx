@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { AiFillCaretDown } from "react-icons/ai";
 import Avatar from "./Avatar";
-import Backdrop from "../Backdrop";
+import Backdrop from "../ui/Backdrop";
 import Link from "next/link";
 import { User } from "@prisma/client";
 import UserMenuItem from "./UserMenuItem";
@@ -32,7 +32,7 @@ const UserMenu: React.FC<Props> = ({ currentUser }) => {
          border-[1px] border-slate-400 rounded-full cursor-pointer transition"
       >
         <Avatar src={currentUser ? currentUser.image : null} />
-        <div>{currentUser && currentUser.name}</div>
+        <div className="hidden md:block">{currentUser && currentUser.name}</div>
         <AiFillCaretDown />
       </div>
       {isMenuOpen && <Backdrop onClick={toggleMenu} />}

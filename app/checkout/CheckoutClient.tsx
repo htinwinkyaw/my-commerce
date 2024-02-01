@@ -2,10 +2,10 @@
 
 import AddressItem from "../profile/AddressItem";
 import { AddressItemMode } from "@/types/enum";
-import Button from "../_components/Button";
+import Button from "../_components/ui/Button";
 import CartItem from "../cart/CartItem";
 import { CurrentUserDetail } from "@/types/user";
-import Heading from "../_components/Heading";
+import Heading from "../_components/ui/Heading";
 import NewAddressPlaceholder from "../_components/NewAddressPlaceholder";
 import React from "react";
 import axios from "axios";
@@ -27,14 +27,20 @@ const CheckoutClient: React.FC<Props> = ({ user }) => {
 
     axios
       .post("/api/orders", {
+        addressId: defaultAddress?.id,
         cartProducts,
         totalAmount,
-        addressId: defaultAddress?.id,
       })
       .then((res) => {
-        handleClearCart();
-        toast.success("Order created.");
-        router.push("/orders");
+        if (res.data.status === 201) {
+          handleClearCart();
+          toast.success(res.data.message);
+          router.push("/orders");
+        }
+
+        if (res.data.status === 500) {
+          toast.error(res.data.message);
+        }
       })
       .catch((error) => {
         toast.error("Order failed.");

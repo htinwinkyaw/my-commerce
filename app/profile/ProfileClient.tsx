@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 import AddressList from "./AddressList";
-import Button from "../_components/Button";
+import Button from "../_components/ui/Button";
 import { CurrentUserDetail } from "@/types/user";
 import NullData from "../_components/NullData";
 import PasswordChangeForm from "./PasswordChangeForm";

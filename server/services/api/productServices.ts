@@ -9,6 +9,7 @@ import prisma from "@/app/_lib/prismadb";
  * @returns Promise resolving newly created product
  */
 const createProduct = async (data: {
+  image: string;
   name: string;
   price: string;
   category: string;
@@ -19,6 +20,7 @@ const createProduct = async (data: {
   try {
     const product = await prisma.product.create({
       data: {
+        image: data.image,
         name: data.name,
         price: parseInt(data.price),
         categoryId: data.category,
@@ -111,7 +113,10 @@ const getProductDetailById = async (productId: string) => {
   try {
     const product = await prisma.product.findFirst({
       where: { id: productId },
-      include: { category: true, reviews: { include: { user: true } } },
+      include: {
+        category: true,
+        reviews: { include: { user: true }, orderBy: { createdAt: "desc" } },
+      },
     });
 
     if (!product) {

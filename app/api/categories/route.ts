@@ -1,4 +1,4 @@
-import categoryServices from "@/server/services/categoryServices";
+import categoryServices from "@/server/services/api/categoryServices";
 import { checkUnauthorizedAdmin } from "@/app/_utils/checkUnauthorizedAdmin";
 import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
 import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";

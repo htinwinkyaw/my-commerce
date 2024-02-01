@@ -1,15 +1,15 @@
-import Container from "@/app/_components/Container";
+import Container from "@/app/_components/ui/Container";
 import ProductEditClient from "./ProductEditClient";
 import React from "react";
-import categoryServices from "@/server/services/categoryServices";
-import productServices from "@/server/services/productServices";
+import categoryServices from "@/server/services/api/categoryServices";
+import productServices from "@/server/services/api/productServices";
 
 const ProductEditPage = async ({
   params,
 }: {
   params: { productId: string };
 }) => {
-  const categories = await categoryServices.getCategories();
+  const categories = await categoryServices.getCategoriesWithoutAll();
   const product = await productServices.getProductById(params.productId);
 
   return (

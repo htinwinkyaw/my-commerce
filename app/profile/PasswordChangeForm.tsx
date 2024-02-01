@@ -3,9 +3,9 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import React, { useState } from "react";
 
-import Button from "../_components/Button";
+import Button from "../_components/ui/Button";
 import { CurrentUserDetail } from "@/types/user";
-import Input from "../_components/Input";
+import Input from "../_components/ui/Input";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";

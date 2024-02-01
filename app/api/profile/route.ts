@@ -3,14 +3,14 @@ import { checkUnauthorizedUser } from "@/app/_utils/checkUnauthorizedUser";
 import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
 import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";
 import prisma from "@/app/_lib/prismadb";
-import profileServices from "@/server/services/profileServices";
+import profileServices from "@/server/services/api/profileServices";
 
 export const PUT = async (request: Request) => {
   try {
     const unauthorizedResponse = await checkUnauthorizedUser();
     if (unauthorizedResponse) return unauthorizedResponse;
 
-    const body: { name: string } = await request.json();
+    const body: { name: string; image: string } = await request.json();
 
     const user = await profileServices.updateProfile(body);
 

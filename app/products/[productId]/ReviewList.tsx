@@ -1,9 +1,6 @@
 "use client";
 
-import { Review, User } from "@prisma/client";
-
-import { ExtendedReview } from "@/types/review";
-import Heading from "@/app/_components/Heading";
+import Heading from "@/app/_components/ui/Heading";
 import { Rating } from "@mui/material";
 import React from "react";
 import moment from "moment";

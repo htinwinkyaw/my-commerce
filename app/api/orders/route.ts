@@ -4,8 +4,8 @@ import { checkUnauthorizedAdmin } from "@/app/_utils/checkUnauthorizedAdmin";
 import { checkUnauthorizedUser } from "@/app/_utils/checkUnauthorizedUser";
 import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
 import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";
-import orderServices from "@/server/services/orderServices";
-import userServices from "@/server/services/userServices";
+import orderServices from "@/server/services/api/orderServices";
+import userServices from "@/server/services/api/userServices";
 
 /**
  * Creating new order
@@ -22,7 +22,11 @@ export const POST = async (request: Request) => {
 
     const body = await request.json();
 
-    const order = orderServices.createOrder(userId!, body);
+    const order = orderServices.createOrder(userId!, {
+      addressId: body.addressId,
+      products: body.cartProducts,
+      amount: body.totalAmount,
+    });
 
     return handleSuccessResponse(201, "New order is created.", order);
   } catch (error) {

@@ -2,13 +2,15 @@
 
 import React, { useState } from "react";
 
-import Button from "@/app/_components/Button";
+import Button from "@/app/_components/ui/Button";
 import { CartProductType } from "@prisma/client";
 import { ExtendedProductType } from "@/types/product";
+import Image from "next/image";
 import NullData from "@/app/_components/NullData";
 import { Rating } from "@mui/material";
 import SetQuantity from "@/app/_components/SetQuantity";
 import { calculateRating } from "@/app/_utils/calculateRating";
+import { truncateName } from "@/app/_utils/truncateName";
 import useCart from "@/app/_hooks/useCart";
 
 interface Props {
@@ -54,7 +56,20 @@ const ProductDetailClient: React.FC<Props> = ({ product }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-      <div>IMAGE WILL BE HERE</div>
+      <div>
+        {product.image && (
+          <div className="w-[100%] h-[100%] aspect-square bg-white">
+            <div className="relative w-[100%] h-[100%]">
+              <Image
+                src={product.image}
+                alt={truncateName(product.name)}
+                fill
+              />
+            </div>
+          </div>
+        )}
+      </div>
+
       <div className="flex flex-col gap-1 text-sm text-slate-600">
         <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
         <div className="flex items-center gap-2">

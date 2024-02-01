@@ -3,7 +3,7 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "../app/_lib/prismadb";
-import userServices from "./services/userServices";
+import userServices from "./services/api/userServices";
 
 const authOptions: AuthOptions = {
   providers: [

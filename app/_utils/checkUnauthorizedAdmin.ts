@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import userServices from "@/server/services/userServices";
+import userServices from "@/server/services/api/userServices";
 
 export const checkUnauthorizedAdmin: () => Promise<
   NextResponse | undefined

@@ -1,10 +1,10 @@
-import Container from "../Container";
+import Container from "../ui/Container";
 import Link from "next/link";
 import NavCart from "./NavCart";
 import React from "react";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
-import userServices from "@/server/services/userServices";
+import userServices from "@/server/services/api/userServices";
 
 const NavBar = async () => {
   const currentUser = await userServices.getCurrentUser();

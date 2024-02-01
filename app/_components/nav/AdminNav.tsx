@@ -1,15 +1,17 @@
 "use client";
 
-import React from "react";
-import Container from "../Container";
-import Link from "next/link";
-import AdminNavItem from "./AdminNavItem";
 import {
   MdDashboard,
+  MdDiamond,
   MdDns,
   MdFormatListBulleted,
   MdLibraryAdd,
 } from "react-icons/md";
+
+import AdminNavItem from "./AdminNavItem";
+import Container from "../ui/Container";
+import Link from "next/link";
+import React from "react";
 import { usePathname } from "next/navigation";
 
 const AdminNav = () => {
@@ -24,6 +26,13 @@ const AdminNav = () => {
               label="Summary"
               icon={MdDashboard}
               selected={pathname === "/admin"}
+            />
+          </Link>
+          <Link href="/admin/banners">
+            <AdminNavItem
+              label="Banners"
+              icon={MdDiamond}
+              selected={pathname === "/admin/banners"}
             />
           </Link>
           <Link href="/admin/add-product">
@@ -45,6 +54,13 @@ const AdminNav = () => {
               label="Manage Orders"
               icon={MdFormatListBulleted}
               selected={pathname === "/admin/manage-orders"}
+            />
+          </Link>
+          <Link href="/admin/manage-categories">
+            <AdminNavItem
+              label="Manage Categories"
+              icon={MdFormatListBulleted}
+              selected={pathname === "/admin/manage-categories"}
             />
           </Link>
         </div>

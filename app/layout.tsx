@@ -1,17 +1,18 @@
-import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "react-hot-toast";
-import NavBar from "./_components/nav/NavBar";
+
 import CartProvider from "./_providers/CartProvider";
-import Loading from "./loading";
 import Footer from "./_components/Footer";
+import Loading from "./loading";
+import type { Metadata } from "next";
+import NavBar from "./_components/nav/NavBar";
+import { Poppins } from "next/font/google";
 import { Suspense } from "react";
+import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
-  title: "MYCOMM",
+  title: "MYCOMMMERCE",
   description: "Ecommerce website in Myanmar.",
 };
 

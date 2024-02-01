@@ -3,7 +3,7 @@
 import { Order, PaymentStatus, Product, User } from "@prisma/client";
 import React, { useEffect, useState } from "react";
 
-import Heading from "@/app/_components/Heading";
+import Heading from "@/app/_components/ui/Heading";
 import { formatNumber } from "@/app/_utils/formatNumber";
 import { formatPrice } from "@/app/_utils/formatPrice";
 
@@ -74,8 +74,6 @@ const SummaryInfo: React.FC<Props> = ({ products, orders, users }) => {
       tempData.paidOrders.digit = paidOrders.length;
       tempData.users.digit = users.length;
 
-      console.log(tempData);
-
       return tempData;
     });
   }, [orders, products, users]);
@@ -83,7 +81,7 @@ const SummaryInfo: React.FC<Props> = ({ products, orders, users }) => {
   const summaryKeys = Object.keys(summaryData);
 
   return (
-    <div className="max-w-[1150px] m-auto">
+    <div className="max-w-[1150px] m-auto text-slate-700">
       <div className="mb-4 mt-8">
         <Heading title="Stats" center />
       </div>

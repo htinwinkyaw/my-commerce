@@ -1,6 +1,6 @@
 import CheckoutClient from "./CheckoutClient";
-import Container from "../_components/Container";
-import userServices from "@/server/services/userServices";
+import Container from "../_components/ui/Container";
+import userServices from "@/server/services/api/userServices";
 
 const CheckoutPage = async () => {
   const user = await userServices.getCurrentUserDetail();

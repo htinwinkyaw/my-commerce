@@ -4,10 +4,10 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { DeliveryStatus, Order, PaymentStatus, User } from "@prisma/client";
 import { MdAccessTimeFilled, MdDeliveryDining, MdDone } from "react-icons/md";
 
-import Heading from "../_components/Heading";
+import Heading from "../_components/ui/Heading";
 import NullData from "../_components/NullData";
 import React from "react";
-import Status from "../_components/Status";
+import Status from "../_components/ui/Status";
 import { formatPrice } from "../_utils/formatPrice";
 
 interface Props {

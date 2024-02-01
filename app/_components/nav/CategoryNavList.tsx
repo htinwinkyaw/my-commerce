@@ -2,7 +2,7 @@
 
 import { Category } from "@prisma/client";
 import CategoryNavItem from "./CategoryNavItem";
-import Container from "../Container";
+import Container from "../ui/Container";
 import { useSearchParams } from "next/navigation";
 
 interface Props {
@@ -15,7 +15,7 @@ const CategoryNavList: React.FC<Props> = ({ categories }) => {
   return (
     <div className="bg-white">
       <Container>
-        <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto">
+        <div className="pt-4 flex flex-row no-wrap items-center justify-between overflow-x-auto">
           {categories.map((category, i) => {
             return (
               <CategoryNavItem

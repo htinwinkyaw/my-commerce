@@ -1,7 +1,7 @@
 import { checkUnauthorizedAdmin } from "@/app/_utils/checkUnauthorizedAdmin";
 import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
 import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";
-import productServices from "@/server/services/productServices";
+import productServices from "@/server/services/api/productServices";
 
 /**
  * Create new product
@@ -14,6 +14,7 @@ export const POST = async (request: Request) => {
     if (unauthorizedResponse) return unauthorizedResponse;
 
     const body: {
+      image: string;
       name: string;
       price: string;
       category: string;

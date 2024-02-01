@@ -1,8 +1,8 @@
 "use client";
 
 import { Category } from "@prisma/client";
-import FormWrap from "@/app/_components/FormWrap";
-import Heading from "@/app/_components/Heading";
+import FormWrap from "@/app/_components/ui/FormWrap";
+import Heading from "@/app/_components/ui/Heading";
 import ProductForm from "./ProductForm";
 
 interface Props {

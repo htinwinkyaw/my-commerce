@@ -1,6 +1,6 @@
-import Container from "@/app/_components/Container";
-import FormWrap from "@/app/_components/FormWrap";
 import AddressForm from "@/app/profile/AddressForm";
+import Container from "@/app/_components/ui/Container";
+import FormWrap from "@/app/_components/ui/FormWrap";
 import React from "react";
 
 const NewAddressPage = () => {

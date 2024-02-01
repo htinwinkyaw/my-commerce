@@ -75,15 +75,8 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
           errors[id] ? "border-rose-400" : "border-slate-300"
         }`}
       >
-        <option selected>{label}</option>
+        <option value="default">{label}</option>
         {options.map((option, i) => {
-          {
-            mode === AddressFormMode.Create && (
-              <option value="" selected>
-                {label}
-              </option>
-            );
-          }
           return (
             <option key={i} value={option}>
               {option}

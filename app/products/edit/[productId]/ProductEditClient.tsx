@@ -2,8 +2,8 @@
 
 import { Category, Product } from "@prisma/client";
 
-import FormWrap from "@/app/_components/FormWrap";
-import Heading from "@/app/_components/Heading";
+import FormWrap from "@/app/_components/ui/FormWrap";
+import Heading from "@/app/_components/ui/Heading";
 import NullData from "@/app/_components/NullData";
 import ProductForm from "@/app/admin/add-product/ProductForm";
 import React from "react";

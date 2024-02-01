@@ -1,6 +1,7 @@
+import { FieldValues, SubmitHandler, UseFormRegister } from "react-hook-form";
+
 import { Category } from "@prisma/client";
 import React from "react";
-import { FieldValues, SubmitHandler, UseFormRegister } from "react-hook-form";
 
 interface Props {
   id: string;
@@ -9,12 +10,7 @@ interface Props {
   categories: Category[];
 }
 
-const SelectCategory: React.FC<Props> = ({
-  id,
-  name,
-  register,
-  categories,
-}) => {
+const SelectCategory: React.FC<Props> = ({ id, register, categories }) => {
   return (
     <div className="w-full">
       <select
@@ -22,9 +18,7 @@ const SelectCategory: React.FC<Props> = ({
         {...register(id, { required: true })}
         className="w-full p-4 text-slate-600 border-2 border-slate-300 rounded-md outline-none"
       >
-        <option value="" selected>
-          -- Select a category --
-        </option>
+        <option value="default">-- Select a category --</option>
         {categories.map((category) => {
           return (
             <option key={category.id} value={category.id}>

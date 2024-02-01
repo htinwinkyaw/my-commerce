@@ -1,7 +1,7 @@
 import CartClient from "./CartClient";
-import Container from "../_components/Container";
+import Container from "../_components/ui/Container";
 import React from "react";
-import userServices from "@/server/services/userServices";
+import userServices from "@/server/services/api/userServices";
 
 const CartPage = async () => {
   const currentUser = await userServices.getCurrentUser();

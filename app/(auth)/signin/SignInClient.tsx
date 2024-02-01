@@ -1,18 +1,23 @@
 "use client";
 
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { AiOutlineGoogle } from "react-icons/ai";
-import Button from "@/app/_components/Button";
-import Heading from "@/app/_components/Heading";
-import Input from "@/app/_components/Input";
+import Button from "@/app/_components/ui/Button";
+import Heading from "@/app/_components/ui/Heading";
+import Input from "@/app/_components/ui/Input";
 import Link from "next/link";
+import { User } from "@prisma/client";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-const SignInClient = () => {
+interface Props {
+  user: User | null;
+}
+
+const SignInClient: React.FC<Props> = ({ user }) => {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -49,6 +54,17 @@ const SignInClient = () => {
         setIsLoading(false);
       });
   };
+
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+      router.refresh();
+    }
+  }, [router, user]);
+
+  if (user) {
+    return <div>Redirecting...</div>;
+  }
 
   return (
     <>

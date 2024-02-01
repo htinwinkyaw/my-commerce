@@ -5,10 +5,10 @@ import React, { useEffect, useState } from "react";
 
 import { Address } from "@prisma/client";
 import { AddressFormMode } from "@/types/enum";
-import Button from "../_components/Button";
+import Button from "../_components/ui/Button";
 import CustomSelect from "../_components/CustomSelect";
-import Heading from "../_components/Heading";
-import Input from "../_components/Input";
+import Heading from "../_components/ui/Heading";
+import Input from "../_components/ui/Input";
 import TextArea from "../admin/add-product/TextArea";
 import axios from "axios";
 import { postalCodes } from "../_utils/postalCodes";
@@ -39,9 +39,9 @@ const AddressForm: React.FC<Props> = ({ address }) => {
       receiverName: address ? address.receiverName : "",
       phone: address ? address.phone : "",
       line: address ? address.line : "",
-      state: address ? address.state : "",
-      township: address ? address.township : "",
-      postalCode: address ? address.postalCode : "",
+      state: address ? address.state : "default",
+      township: address ? address.township : "default",
+      postalCode: address ? address.postalCode : "default",
       deliveryNote: address ? address.deliveryNote : "",
     },
   });
@@ -55,7 +55,7 @@ const AddressForm: React.FC<Props> = ({ address }) => {
       setSelectedState(address.state);
       setSelectedTownship(address.township);
     }
-  }, []);
+  }, [address]);
 
   useEffect(() => {
     if (!selectedState) return;
@@ -110,6 +110,16 @@ const AddressForm: React.FC<Props> = ({ address }) => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setLoading(true);
+
+    if (
+      data.state === "default" ||
+      data.township === "default" ||
+      data.postalCode === "default"
+    ) {
+      toast.error("Please select the address location.");
+      setLoading(false);
+      return;
+    }
 
     try {
       const endpoint = address

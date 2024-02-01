@@ -1,8 +1,8 @@
 import { checkUnauthorizedUser } from "@/app/_utils/checkUnauthorizedUser";
 import { handleErrorResponse } from "@/app/_utils/handleErrorResponse";
 import { handleSuccessResponse } from "@/app/_utils/handleSuccessResponse";
-import reviewServices from "@/server/services/reviewServices";
-import userServices from "@/server/services/userServices";
+import reviewServices from "@/server/services/api/reviewServices";
+import userServices from "@/server/services/api/userServices";
 
 /**
  * Create new review

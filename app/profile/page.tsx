@@ -1,8 +1,8 @@
-import Container from "../_components/Container";
+import Container from "../_components/ui/Container";
 import NullData from "../_components/NullData";
 import ProfileClient from "./ProfileClient";
 import React from "react";
-import userServices from "@/server/services/userServices";
+import userServices from "@/server/services/api/userServices";
 
 const ProfilePage = async () => {
   const currentUser = await userServices.getCurrentUser();

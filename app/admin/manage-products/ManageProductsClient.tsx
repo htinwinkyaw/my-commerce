@@ -11,11 +11,11 @@ import {
 } from "react-icons/md";
 import React, { useCallback } from "react";
 
-import ActionButton from "@/app/_components/ActionButton";
+import ActionButton from "@/app/_components/ui/ActionButton";
 import CustomDataGrid from "@/app/_components/CustomDataGrid";
 import { ExtendedProductType } from "@/types/product";
 import NullData from "@/app/_components/NullData";
-import Status from "@/app/_components/Status";
+import Status from "@/app/_components/ui/Status";
 import axios from "axios";
 import { formatPrice } from "@/app/_utils/formatPrice";
 import toast from "react-hot-toast";
@@ -71,7 +71,7 @@ const ManageProductsClient: React.FC<Props> = ({ products }) => {
       brand: product.brand,
       category: product.category.name,
       inStock: product.inStock,
-      images: product.images,
+      image: product.image,
     };
   });
 
